@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
-export default class Detail extends Component {
+export default class About extends Component {
     render() {
+
+        console.log('props',this.props)
         return (
             <div>
-                tham so url: {this.props.match.params.postID}
+                
             </div>
         )
     }

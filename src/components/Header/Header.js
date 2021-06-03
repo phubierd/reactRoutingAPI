@@ -10,13 +10,13 @@ export default class Header extends Component {
                 <div className="collapse navbar-collapse" id="collapsibleNavId">
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li className="nav-item active">
-                            <NavLink className="nav-link" to="/home">Home <span className="sr-only">(current)</span></NavLink>
+                            <NavLink activeClassName="bg-white text-dartk" activeStyle={{color:'red',border:'1px solid red'}} className="nav-link" to="/home">Home <span className="sr-only">(current)</span></NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                            <NavLink activeClassName="bg-white text-dartk" activeStyle={{color:'red',border:'1px solid red'}} className="nav-link" to="/login">Login</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/register">Register</NavLink>
+                            <NavLink activeClassName="bg-white text-dartk" activeStyle={{color:'red',border:'1px solid red'}} className="nav-link" to="/register">Register</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/detail">Detail</NavLink>
