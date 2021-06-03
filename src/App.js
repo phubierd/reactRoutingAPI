@@ -9,6 +9,9 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import HomeTemplate from './templates/HomeTemplate/HomeTemplate';
 import UserLogin from './templates/UserTemplate/UserLogin';
+import UseStateDemo from './pages/Hooks/UseStateDemo';
+import UseEffectDemo from './pages/Hooks/UseEffectDemo';
+import DanhSachSanPham from './pages/Hooks/HookRedux/DanhSachSanPham';
 
 function App() {
   return (
@@ -19,6 +22,11 @@ function App() {
 
         <HomeTemplate component={Home} path="/home"/>
         <HomeTemplate component={About} path="/about"/>
+
+        {/* //demoHooks? */}
+        <HomeTemplate component={UseStateDemo} path="/usestate"/>
+        <HomeTemplate component={UseEffectDemo} path="/useeffect"/>
+        <HomeTemplate component={DanhSachSanPham} path="/reduxhook"/>
 
         <UserLogin component={Login} path="/login"/>
 
@@ -47,7 +55,7 @@ function App() {
         <Route exact path="/axios" component={DemoAxios} />
 
 
-        <Route path="/" component={Home} />
+        <HomeTemplate path="/" component={Home} />
       </Switch>
 
     </BrowserRouter>

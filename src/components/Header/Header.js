@@ -26,6 +26,9 @@ export default class Header extends Component {
                             <div className="dropdown-menu" aria-labelledby="dropdownId">
 
                             <NavLink className="dropdown-item" to ="/axios">Demo Axios</NavLink>
+                            <NavLink className="dropdown-item" to ="/usestate">Use State</NavLink>
+                            <NavLink className="dropdown-item" to ="/useeffect">Use Effect</NavLink>
+                            <NavLink className="dropdown-item" to ="/reduxhook">Redux Hooks</NavLink>
                          
                             </div>
                         </li>
