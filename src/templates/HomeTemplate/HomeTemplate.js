@@ -4,7 +4,7 @@ import {Route} from 'react-router'
 
 
 
-//HOC: higher or component
+//HOC: higher order component
 
 export default function HomeTemplate(props) {
 

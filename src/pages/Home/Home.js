@@ -32,7 +32,21 @@ class Home extends Component {
     
     async componentDidMount() {
         // dispatch loai 1 : => dispatch action la object {typeof,data}
+        // try{
+        //     let result = await axios({
+        //         url: 'https://movie0706.cybersoft.edu.vn/api/quanlyphim/laydanhsachphim?manhom=gp01',
+        //         method: 'get',
+        //     });
 
+        //     const action = {
+        //         type:'SET_FILMS',
+        //         dataFilms: result.data
+        //     }
+        //     this.props.dispatch(action)
+
+        // }catch(errors){
+        //     console.log('errors',errors.response.data)
+        // }
         // const action = {
         //     type:'abc',
         //     data:{}
