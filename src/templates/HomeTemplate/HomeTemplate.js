@@ -10,14 +10,12 @@ export default function HomeTemplate(props) {
 
     //props = {component: Home, path:'/home'}
     return (
-        <div>
             <Route path={props.path} exact render={(propsRoute)=>{
                 return <div>
                     <Header/>
-                    <props.component/>
+                    <props.component {...propsRoute}/>
                 </div>
             }}/>
             
-        </div>
     )
 }
