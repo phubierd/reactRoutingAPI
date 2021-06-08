@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import {getApiFilmAction} from '../../redux/actions/FilmActions'
+import { NavLink } from 'react-router-dom'
 
 
 
@@ -11,7 +12,7 @@ class Home extends Component {
         return (
             <div className="container">
                 <h3 className="text-center">Danh Sách Phim</h3>
-                <div className="row">
+                <div className="row mt-5">
                     {this.props.arrFilm.map((film, index) => {
                         return <div className="col-4" key={index}>
                             <div className="card text-white bg-primary">
@@ -20,6 +21,7 @@ class Home extends Component {
                                     <h4 className="card-title">{film.tenPhim}</h4>
                                     <p className="card-text">{film.moTa}</p>
                                 </div>
+                                <NavLink className="btn btn-success" to={`/detail/${film.maPhim}`}>Đặt Vé</NavLink>
                             </div>
 
                         </div>

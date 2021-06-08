@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Router, Switch } from 'react-router-dom'
 import Header from './components/Header/Header';
 import About from './pages/About/About';
 import DemoAxios from './pages/DemoAxios/DemoAxios';
@@ -12,10 +12,14 @@ import UserLogin from './templates/UserTemplate/UserLogin';
 import UseStateDemo from './pages/Hooks/UseStateDemo';
 import UseEffectDemo from './pages/Hooks/UseEffectDemo';
 import DanhSachSanPham from './pages/Hooks/HookRedux/DanhSachSanPham';
+import { createBrowserHistory } from 'history';
+//thu vien chuyển hướng trang
+
+export const history = createBrowserHistory();
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router history={history}>
       {/* <Header /> */}
 
       <Switch>
@@ -27,6 +31,8 @@ function App() {
         <HomeTemplate component={UseStateDemo} path="/usestate"/>
         <HomeTemplate component={UseEffectDemo} path="/useeffect"/>
         <HomeTemplate component={DanhSachSanPham} path="/reduxhook"/>
+        <HomeTemplate component={DanhSachSanPham} path="/reduxhook"/>
+        <HomeTemplate component={Register} path="/register"/>
 
         <UserLogin component={Login} path="/login"/>
 
@@ -58,7 +64,7 @@ function App() {
         <HomeTemplate path="/" component={Home} />
       </Switch>
 
-    </BrowserRouter>
+    </Router>
 
   );
 }
