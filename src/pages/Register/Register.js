@@ -49,6 +49,7 @@ export default function Register() {
             // console.log(values)
             const action = dangKyAction(values);
             dispatch (action)
+            // dispatch(dangKyAction(values))
         }
     })
 
