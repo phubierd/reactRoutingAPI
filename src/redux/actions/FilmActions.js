@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SET_FILMS, SET_FILM_DETAIL } from './Type/FilmTypes';
+import { SET_FILMS, SET_FILM_DETAIL,SET_CHI_TIET_PHONG_VE } from './Type/FilmTypes';
 
 
 export const getApiFilmAction = (maNhom) => {
@@ -44,4 +44,31 @@ export const getFilmDetailAction = (maPhim)=>{
             console.log('errors',errors.response.data)
         }
     }
+}
+
+
+
+export const layChiTietPhongVeAction = (maLichChieu)=>{
+
+    return async dispatch =>{
+        try {
+            const result = await axios({
+                url:`https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`,
+                method:'get'
+            })
+
+            console.log('result',result.data)
+            //sau khi lấy dữ liệu phòng vé từ api về => dispatch lên redux
+            dispatch({
+                type: SET_CHI_TIET_PHONG_VE,
+                chiTietPhongVe:result.data
+            })
+        }
+        catch(error){
+            console.log(error.response?.data)
+        }
+    }
+
+
+
 }

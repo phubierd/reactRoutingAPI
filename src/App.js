@@ -13,6 +13,7 @@ import UseStateDemo from './pages/Hooks/UseStateDemo';
 import UseEffectDemo from './pages/Hooks/UseEffectDemo';
 import DanhSachSanPham from './pages/Hooks/HookRedux/DanhSachSanPham';
 import { createBrowserHistory } from 'history';
+import CheckOut from './pages/CheckOut/CheckOut';
 //thu vien chuyển hướng trang
 
 export const history = createBrowserHistory();
@@ -33,6 +34,8 @@ function App() {
         <HomeTemplate component={DanhSachSanPham} path="/reduxhook"/>
         <HomeTemplate component={DanhSachSanPham} path="/reduxhook"/>
         <HomeTemplate component={Register} path="/register"/>
+
+        <HomeTemplate component={CheckOut} path="/checkout/:id"/>
 
         <UserLogin component={Login} path="/login"/>
 

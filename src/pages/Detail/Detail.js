@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getFilmDetailAction } from '../../redux/actions/FilmActions'
+import TabMenu from './TabMenu'
 
 export default function Detail(props) {
     const dispatch = useDispatch();
@@ -37,6 +38,13 @@ export default function Detail(props) {
                         </thead>
                     </table>
                 </div>
+
+                <div className="mt-5">
+                    <h3>Thông Tin Lịch Chiếu</h3>
+                    <TabMenu heThongRapChieu={thongTinChiTiet.heThongRapChieu}/>
+                </div>
+
+
             </div>
         </div>
     )
