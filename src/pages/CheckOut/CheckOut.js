@@ -6,10 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { layChiTietPhongVeAction } from '../../redux/actions/FilmActions'
 
 import './CheckOut.css'
+import _ from 'lodash'
+import { USER_LOGIN } from "../../util/setting";
+
+//redirect là thẻ chuyển hướng trang
+import { Redirect } from "react-router";
 
 export default function CheckOut(props) {
 
-    const { chiTietPhongVe } = useSelector((state) => state.FilmReducer);
+    const { chiTietPhongVe, danhSachGheDangDat } = useSelector((state) => state.FilmReducer);
+    // console.log('danhSachGheDangDat',danhSachGheDangDat)
     const { thongTinPhim, danhSachGhe } = chiTietPhongVe
 
     const dispatch = useDispatch();
@@ -23,6 +29,12 @@ export default function CheckOut(props) {
         dispatch(action)
     }, [])
 
+    if (!localStorage.getItem(USER_LOGIN)){
+        alert('Bạn cần phải Login')
+        return <Redirect to="/login"/>
+    }else{
+        
+    }
     console.log('chiTietPhongVe', chiTietPhongVe)
 
     const renderGhe = () => {
@@ -30,20 +42,31 @@ export default function CheckOut(props) {
 
             let classGheVip = ghe.loaiGhe === 'Vip' ? 'gheVip' : '';
             let classGheDaDat = ghe.daDat === true ? 'gheDaDat' : '';
+            //mỗi lần render ra 1 ghế đem ghế đó so sánh có trong mảng ghế đnag đặt ko, nếu có thêm css vào
+            let classGheDangDat = '';
+            
+            let indexGheDD = danhSachGheDangDat.findIndex(gheDD=>gheDD.maGhe === ghe.maGhe);
+            if(indexGheDD !== -1) {
+                classGheDangDat = 'gheDangDat'
+            }
             // if(ghe.loaiGhe === 'Vip'){
             //     classGheVip = 'gheVip'
             // }
 
             return <Fragment key={index}>
 
-                <button disabled={ghe.daDat} className={`ghe ${classGheVip} ${classGheDaDat}`}>{ghe.stt}</button>
+                <button onClick={()=>{
+                    const action = {type:'DAT_GHE',ghe:ghe};
+                    dispatch(action);
+                }} disabled={ghe.daDat} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat}`}>{ghe.stt}</button>
 
 
-                {(index + 1)% 16 ===0 ? <br/> : ''}
+                {(index + 1) % 16 === 0 ? <br /> : ''}
 
             </Fragment>
         })
     }
+    
 
     return (
         <div className="cointainer-fluid">
@@ -51,8 +74,9 @@ export default function CheckOut(props) {
                 <div className="col-8">
                     <div className="text-center">
                         <img src="https://tix.vn/app/assets/img/icons/screen.png" alt="..." />
-                        <br/>
+                        <br />
                         {renderGhe()}
+
                     </div>
                 </div>
                 <div className="col-4">
@@ -66,7 +90,10 @@ export default function CheckOut(props) {
                     <hr />
                     <div className="mt-2">
                         <div className="row">
-                            <div className="col-9">Ghế: 01 02 03</div>
+                            <div className="col-9">
+                                Ghế: {_.sortBy(danhSachGheDangDat,['stt']).map((gheDangDat, index) => {
+                                return <span key={index} className="font-weight text-danger"> {gheDangDat.stt}</span>
+                            })}</div>
                             <div className="text-success font-weight-bold">100</div>
                         </div>
                     </div>
@@ -76,9 +103,12 @@ export default function CheckOut(props) {
                         <hr />
                         <p>Phone: 0944013954</p>
                     </div>
+                    {/* <div className="text-center">
+                        <button className='btn btn-info'> ĐẶT VÉ </button>
+                    </div> */}
                     <div
                         style={{ cursor: "pointer" }}
-                        className="w-full text-white text-center"
+                        className="w-full text-white text-center btn-info"
                     >
                         <span className="display-4 py-2">ĐẶT VÉ</span>
                     </div>

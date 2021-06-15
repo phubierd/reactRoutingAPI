@@ -1,9 +1,19 @@
-import { SET_FILMS, SET_FILM_DETAIL,SET_CHI_TIET_PHONG_VE } from "../actions/Type/FilmTypes"
+import { SET_FILMS, SET_FILM_DETAIL, SET_CHI_TIET_PHONG_VE } from "../actions/Type/FilmTypes"
 
 const stateDefault = {
     arrFilm: [{ maPhim: 1, tenPhim: 'ABC', hinhAnh: 'https://picsum.photos/200/200' }],
-    thongTinChiTiet:{thongTinPhim:{maPhim:'12312312'}},
-    chiTietPhongVe:{}
+    thongTinChiTiet: {},
+    chiTietPhongVe: {},
+    danhSachGheDangDat: [{
+        daDat: false,
+        giaVe: 75000,
+        loaiGhe: "Thuong",
+        maGhe: 49961,
+        maRap: 467,
+        stt: "01",
+        taiKhoanNguoiDat: null,
+        tenGhe: "01"
+    }],
 }
 
 
@@ -14,14 +24,28 @@ export const FilmReducer = (state = stateDefault, action) => {
             return { ...state }
         }
 
-        case SET_FILM_DETAIL:{
-            state.thongTinChiTiet= action.thongTinChiTiet
-            return{...state}
+        case SET_FILM_DETAIL: {
+            state.thongTinChiTiet = action.thongTinChiTiet
+            return { ...state }
         }
 
-        case SET_CHI_TIET_PHONG_VE:{
+        case SET_CHI_TIET_PHONG_VE: {
             state.chiTietPhongVe = action.chiTietPhongVe;
-            return{...state}
+            return { ...state }
+        }
+
+        case 'DAT_GHE' : {
+            let danhSachGheCapNhat = [...state.danhSachGheDangDat];
+
+            //tim actionGhe gửi lên có tồn tại trong mảng ghế đang đặt ko? nếu có => xóa đi, chưa có thì thêm vào
+            let index = danhSachGheCapNhat.findIndex(gheDD => gheDD.maGhe === action.ghe.maGhe);
+            if(index !== -1){
+                danhSachGheCapNhat.splice(index,1);
+            }else{
+                danhSachGheCapNhat.push(action.ghe);
+            }
+            state.danhSachGheDangDat = danhSachGheCapNhat;
+            return {...state}
         }
         default: return state
     }
