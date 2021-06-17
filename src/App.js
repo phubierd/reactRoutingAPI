@@ -14,6 +14,9 @@ import UseEffectDemo from './pages/Hooks/UseEffectDemo';
 import DanhSachSanPham from './pages/Hooks/HookRedux/DanhSachSanPham';
 import { createBrowserHistory } from 'history';
 import CheckOut from './pages/CheckOut/CheckOut';
+import Loading from './components/Loading/Loading';
+import {AdminTemplate} from './templates/AdminTemplate/AdminTemplate';
+import AdminPage from './pages/AdminPage/AdminPage';
 //thu vien chuyển hướng trang
 
 export const history = createBrowserHistory();
@@ -22,6 +25,8 @@ function App() {
   return (
     <Router history={history}>
       {/* <Header /> */}
+
+      <Loading/>
 
       <Switch>
 
@@ -62,6 +67,8 @@ function App() {
         <Route exact path="/register" component={Register} />
 
         <Route exact path="/axios" component={DemoAxios} />
+
+        <AdminTemplate exact path="/admin" component={AdminPage}/>
 
 
         <HomeTemplate path="/" component={Home} />

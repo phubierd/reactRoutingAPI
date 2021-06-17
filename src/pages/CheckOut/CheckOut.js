@@ -11,12 +11,18 @@ import { USER_LOGIN } from "../../util/setting";
 
 //redirect là thẻ chuyển hướng trang
 import { Redirect } from "react-router";
+import { datVeAction } from "../../redux/actions/UserAction";
+
+//thư viện icon của adntd
+import {UserAddOutlined} from '@ant-design/icons'
 
 export default function CheckOut(props) {
 
     const { chiTietPhongVe, danhSachGheDangDat } = useSelector((state) => state.FilmReducer);
     // console.log('danhSachGheDangDat',danhSachGheDangDat)
     const { thongTinPhim, danhSachGhe } = chiTietPhongVe
+
+    const { userLogin } = useSelector(state => state.UserReducer)
 
     const dispatch = useDispatch();
 
@@ -29,11 +35,11 @@ export default function CheckOut(props) {
         dispatch(action)
     }, [])
 
-    if (!localStorage.getItem(USER_LOGIN)){
+    if (!localStorage.getItem(USER_LOGIN)) {
         alert('Bạn cần phải Login')
-        return <Redirect to="/login"/>
-    }else{
-        
+        return <Redirect to="/login" />
+    } else {
+
     }
     console.log('chiTietPhongVe', chiTietPhongVe)
 
@@ -44,9 +50,14 @@ export default function CheckOut(props) {
             let classGheDaDat = ghe.daDat === true ? 'gheDaDat' : '';
             //mỗi lần render ra 1 ghế đem ghế đó so sánh có trong mảng ghế đnag đặt ko, nếu có thêm css vào
             let classGheDangDat = '';
-            
-            let indexGheDD = danhSachGheDangDat.findIndex(gheDD=>gheDD.maGhe === ghe.maGhe);
-            if(indexGheDD !== -1) {
+
+            let classGheMinhDat = '';
+            if (ghe.taiKhoanNguoiDat === userLogin.taiKhoan) {
+                classGheMinhDat = 'gheMinhDat'
+            }
+
+            let indexGheDD = danhSachGheDangDat.findIndex(gheDD => gheDD.maGhe === ghe.maGhe);
+            if (indexGheDD !== -1) {
                 classGheDangDat = 'gheDangDat'
             }
             // if(ghe.loaiGhe === 'Vip'){
@@ -55,10 +66,14 @@ export default function CheckOut(props) {
 
             return <Fragment key={index}>
 
-                <button onClick={()=>{
-                    const action = {type:'DAT_GHE',ghe:ghe};
+                <button onClick={() => {
+                    const action = { type: 'DAT_GHE', ghe: ghe };
                     dispatch(action);
-                }} disabled={ghe.daDat} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat}`}>{ghe.stt}</button>
+                }} disabled={ghe.daDat} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheMinhDat}`}>
+                    
+                    {classGheMinhDat === '' ? ghe.stt : <UserAddOutlined />}
+                    
+                </button>
 
 
                 {(index + 1) % 16 === 0 ? <br /> : ''}
@@ -66,7 +81,7 @@ export default function CheckOut(props) {
             </Fragment>
         })
     }
-    
+
 
     return (
         <div className="cointainer-fluid">
@@ -79,8 +94,11 @@ export default function CheckOut(props) {
 
                     </div>
                 </div>
-                <div className="col-4">
-                    <div className="text-success display-4">0 Đ</div>
+                <div className="col-4 mt-5">
+                    <div className="text-success display-4 text-center">
+                        {danhSachGheDangDat.reduce((tongTien, gheDD, index) => {
+                            return tongTien += gheDD.giaVe
+                        }, 0).toLocaleString()} Đ</div>
                     <hr />
                     <div className="thongTinPhim my-2">
                         <p>Ten Phim: {thongTinPhim?.tenPhim}</p>
@@ -91,10 +109,14 @@ export default function CheckOut(props) {
                     <div className="mt-2">
                         <div className="row">
                             <div className="col-9">
-                                Ghế: {_.sortBy(danhSachGheDangDat,['stt']).map((gheDangDat, index) => {
-                                return <span key={index} className="font-weight text-danger"> {gheDangDat.stt}</span>
-                            })}</div>
-                            <div className="text-success font-weight-bold">100</div>
+                                Ghế: {_.sortBy(danhSachGheDangDat, ['maGhe']).map((gheDangDat, index) => {
+                                    return <span key={index} className="font-weight text-danger"> {gheDangDat.stt}</span>
+                                })}</div>
+                            <div className="text-success font-weight-bold">
+                                {danhSachGheDangDat.reduce((tongTien, gheDD, index) => {
+                                    return tongTien += gheDD.giaVe
+                                }, 0).toLocaleString()}
+                            </div>
                         </div>
                     </div>
                     <hr />
@@ -106,7 +128,19 @@ export default function CheckOut(props) {
                     {/* <div className="text-center">
                         <button className='btn btn-info'> ĐẶT VÉ </button>
                     </div> */}
-                    <div
+                    <div onClick={() => {
+
+                        let thongTinDatVe = {
+
+                            "maLichChieu": props.match.params.id,
+                            "danhSachVe": danhSachGheDangDat,
+                            "taiKhoanNguoiDung": userLogin.taiKhoan
+
+                        }
+                        console.log('thongTinDatVe', thongTinDatVe)
+                        // return;
+                        dispatch(datVeAction(thongTinDatVe))
+                    }}
                         style={{ cursor: "pointer" }}
                         className="w-full text-white text-center btn-info"
                     >

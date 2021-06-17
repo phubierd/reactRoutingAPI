@@ -10,7 +10,7 @@
 }
 
 .gheDaDat{
-    background-color: rgb(238, 51, 51);
+    background-color: rgb(238, 51, 51) !important;
     cursor: no-drop;
 }
 
@@ -24,5 +24,6 @@
 
 
 .gheMinhDat {
-    background-color: papayawhip;
+    background-color: papayawhip !important;
+    color: orange !important;
 }

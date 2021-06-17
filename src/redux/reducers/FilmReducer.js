@@ -47,6 +47,13 @@ export const FilmReducer = (state = stateDefault, action) => {
             state.danhSachGheDangDat = danhSachGheCapNhat;
             return {...state}
         }
+
+        case 'XOA_DANH_SACH_GHE_DANG_DAT':{
+            state.danhSachGheDangDat=[];
+            return{...state}
+        }
+
+
         default: return state
     }
 }

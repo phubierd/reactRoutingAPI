@@ -5,6 +5,7 @@ import { FilmReducer } from './reducers/FilmReducer';
 import reduxThunk from 'redux-thunk'
 import { QuanLySanPhamReducer } from './reducers/QuanLySanPhamReducer';
 import {UserReducer} from './reducers/UserReducer'
+import { LoadingReducer } from './reducers/LoadingReducer';
 
 const rootReducer = combineReducers({
     //Chứa các state của toàn ứng dụng
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
 
    QuanLySanPhamReducer,
 
-   UserReducer
+   UserReducer,
+   LoadingReducer,
 
 })
 

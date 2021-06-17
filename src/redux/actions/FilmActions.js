@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { displayLoadingAction, hideLoadingAction } from './LoadingAction';
 import { SET_FILMS, SET_FILM_DETAIL,SET_CHI_TIET_PHONG_VE } from './Type/FilmTypes';
 
 
@@ -51,6 +52,9 @@ export const getFilmDetailAction = (maPhim)=>{
 export const layChiTietPhongVeAction = (maLichChieu)=>{
 
     return async dispatch =>{
+
+        // dispatch(displayLoadingAction)
+
         try {
             const result = await axios({
                 url:`https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`,
@@ -63,6 +67,8 @@ export const layChiTietPhongVeAction = (maLichChieu)=>{
                 type: SET_CHI_TIET_PHONG_VE,
                 chiTietPhongVe:result.data
             })
+
+            // dispatch(hideLoadingAction)
         }
         catch(error){
             console.log(error.response?.data)
