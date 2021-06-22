@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Route } from 'react-router-dom';
+import { Route,NavLink } from 'react-router-dom';
 
 import { Layout, Menu } from 'antd';
 import {
@@ -9,11 +9,16 @@ import {
     VideoCameraOutlined,
     UploadOutlined,
 } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { Redirect } from "react-router";
 
 const { Header, Sider, Content } = Layout;
 
 
 export const AdminTemplate = (props) => {
+
+    const {userLogin} = useSelector(state=>state.UserReducer);
+    console.log('userLogin',userLogin);
 
     const [state, setState] = useState({
         collapsed: false,
@@ -25,6 +30,11 @@ export const AdminTemplate = (props) => {
         });
     };
 
+    if(userLogin.maLoaiNguoiDung !== 'QuanTri'){
+        alert('Bạn không có quyền truy cập vào trang này!!');
+        return <Redirect to='/'/>
+    }
+
     return (
         <Route path={props.path} exact render={(propsRoute) => {
             return <Layout>
@@ -34,7 +44,7 @@ export const AdminTemplate = (props) => {
                     </div>
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                         <Menu.Item key="1" icon={<UserOutlined />}>
-                            nav 1
+                            <NavLink to='/admin/films'>Quan Ly Phim</NavLink>
                         </Menu.Item>
                         <Menu.Item key="2" icon={<VideoCameraOutlined />}>
                             nav 2

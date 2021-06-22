@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { quanLyPhimService } from '../../services/quanLyPhimService';
+import { ACCESSTOKEN } from '../../util/setting';
 import { displayLoadingAction, hideLoadingAction } from './LoadingAction';
 import { SET_FILMS, SET_FILM_DETAIL,SET_CHI_TIET_PHONG_VE } from './Type/FilmTypes';
 
@@ -6,10 +8,12 @@ import { SET_FILMS, SET_FILM_DETAIL,SET_CHI_TIET_PHONG_VE } from './Type/FilmTyp
 export const getApiFilmAction = (maNhom) => {
    return async (dispatch) => {
         try {
-            let result = await axios({
-                url: `https://movie0706.cybersoft.edu.vn/api/quanlyphim/laydanhsachphim?manhom=${maNhom}`,
-                method: 'get',
-            });
+            let result = await quanLyPhimService.layDanhSachPhim()
+
+            // axios({
+            //     url: `https://movie0706.cybersoft.edu.vn/api/quanlyphim/laydanhsachphim?manhom=${maNhom}`,
+            //     method: 'get',
+            // });
 
             //sau khi lấy dữ liệu từ api về => đưa dữ liệu lên redux
             const action = {
@@ -77,4 +81,23 @@ export const layChiTietPhongVeAction = (maLichChieu)=>{
 
 
 
+}
+
+
+export const themPhimAction = (formData)=>{
+    return async dispatch =>{
+        try{
+            const result = await axios({
+                url:'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/ThemPhim',
+                method:'post',
+                data:formData,
+                headers:{
+                    'Authorization': `Bearer ${localStorage.getItem(ACCESSTOKEN)}`
+                }
+            })
+            console.log('result',result.data)
+        }catch(err){
+            console.log(err.response?.data)
+        }
+    }
 }

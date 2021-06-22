@@ -17,6 +17,8 @@ import CheckOut from './pages/CheckOut/CheckOut';
 import Loading from './components/Loading/Loading';
 import {AdminTemplate} from './templates/AdminTemplate/AdminTemplate';
 import AdminPage from './pages/AdminPage/AdminPage';
+import QuanLyPhim from './pages/QuanLyPhim/QuanLyPhim';
+import ThemPhim from './pages/ThemPhim';
 //thu vien chuyển hướng trang
 
 export const history = createBrowserHistory();
@@ -69,6 +71,10 @@ function App() {
         <Route exact path="/axios" component={DemoAxios} />
 
         <AdminTemplate exact path="/admin" component={AdminPage}/>
+        <AdminTemplate exact path="/admin/films" component={QuanLyPhim}/>
+        <AdminTemplate exact path="/admin/addfilm" component={ThemPhim}/>
+
+
 
 
         <HomeTemplate path="/" component={Home} />
