@@ -109,7 +109,7 @@ export default function CheckOut(props) {
                     <div className="mt-2">
                         <div className="row">
                             <div className="col-9">
-                                Ghế: {_.sortBy(danhSachGheDangDat, ['maGhe']).map((gheDangDat, index) => {
+                                Ghế: {_.sortBy(danhSachGheDangDat, ['stt']).map((gheDangDat, index) => {
                                     return <span key={index} className="font-weight text-danger"> {gheDangDat.stt}</span>
                                 })}</div>
                             <div className="text-success font-weight-bold">
