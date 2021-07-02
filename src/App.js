@@ -20,6 +20,7 @@ import AdminPage from './pages/AdminPage/AdminPage';
 import QuanLyPhim from './pages/QuanLyPhim/QuanLyPhim';
 import ThemPhim from './pages/ThemPhim';
 //thu vien chuyển hướng trang
+import "tailwindcss/tailwind.css"
 
 export const history = createBrowserHistory();
 
